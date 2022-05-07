@@ -10,8 +10,6 @@ contract Stack {
         _;
     }
 
-    event Pop ( string result );
-
     function push(string memory _value) public {
         count++;
         store[count] = _value;
@@ -19,9 +17,8 @@ contract Stack {
 
     function pop() public empty{
         count--;
-        string memory result = store[count];
-        delete store[count + 1];
-        emit Pop(result);
+        delete store[count + 1]; //mutating state
+        peek();
     }
 
     function peek() public view returns(string memory){
